@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": ":3",
   "main": "bot.js",
-  "engines": {
-    "node": "18.x"
-  },
   "scripts": {
     "start": "node bot.js"
   },
