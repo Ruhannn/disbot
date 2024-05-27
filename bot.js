@@ -2,6 +2,7 @@ const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 const { Client, GatewayIntentBits } = require("discord.js");
+const keep_alive = require("./keep_alive").keepAlive;
 require("dotenv").config();
 const app = express();
 const server = http.createServer(app);
