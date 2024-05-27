@@ -61,7 +61,10 @@ io.on("connection", (socket) => {
 client.login(TOKEN).catch((error) => {
   console.error("Error logging in:", error);
 });
+app.get('/"', (req, res) => {
+  res.send("i love ayaka");
+});
 const PORT = 3001;
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Love ayaka on port ${PORT}`);
 });
