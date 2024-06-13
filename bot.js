@@ -7,7 +7,7 @@ const keep_alive = require("./keep_alive").keepAlive;
 require("dotenv").config();
 const app = express();
 
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: "http://localhost:5173" }));
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
