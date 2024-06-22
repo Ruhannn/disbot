@@ -6,11 +6,11 @@ const { Client, GatewayIntentBits } = require("discord.js");
 require("dotenv").config();
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "*" }));
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173", "*"],
+    origin: ["*"],
     methods: ["GET", "POST"],
   },
 });
@@ -37,6 +37,7 @@ client.on("messageCreate", (message) => {
     io.emit("message", { text: extractedContent, type: "bot" });
   }
 });
+
 io.on("connection", (socket) => {
   console.log("A user connected");
   socket.on("disconnect", () => {
@@ -46,12 +47,11 @@ io.on("connection", (socket) => {
     console.log("Received message:", msg);
     const channel = client.channels.cache.get(channelID);
     if (channel) {
-      // Send the received message to the Discord channel
       channel
-        .send(msg)
+        .send(msg.text)
         .then(() => {
           console.log("Message sent successfully");
-          io.emit("message", { text: msg, type: "user" });
+          io.emit("message", { text: msg.text, type: "user" });
         })
         .catch((error) => {
           console.error("Error sending message:", error);
@@ -61,6 +61,7 @@ io.on("connection", (socket) => {
     }
   });
 });
+
 client.login(TOKEN).catch((error) => {
   console.error("error", error);
 });
